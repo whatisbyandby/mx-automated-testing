@@ -9,6 +9,7 @@
     <libelement value="jar://C:/Program Files/Mendix/9.24.25.40954/runtime/bundles/org.eclipse.jetty.toolchain.jetty-javax-websocket-api.jar!/" />
     <libelement value="jar://$MODULE_DIR$/userlib/commons-io-2.11.0.jar!/" />
     <libelement value="jar://$MODULE_DIR$/userlib/commons-lang3-3.12.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/userlib/gson-2.11.0.jar!/" />
     <libelement value="jar://$MODULE_DIR$/userlib/hamcrest-core-1.3.jar!/" />
     <libelement value="jar://$MODULE_DIR$/userlib/httpclient5-5.2.1.jar!/" />
     <libelement value="jar://$MODULE_DIR$/userlib/httpcore5-5.2.jar!/" />
@@ -94,6 +95,15 @@
       <library name="commons-lang3-3.12.0.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/userlib/commons-lang3-3.12.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="gson-2.11.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/userlib/gson-2.11.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

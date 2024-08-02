@@ -3,6 +3,7 @@ package automatedtesting;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.logging.ILogNode;
+
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
@@ -14,7 +15,7 @@ import org.junit.runner.Request;
 import org.junit.runners.JUnit4;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
-//import automatedtesting.UnitTestRunListener;
+import automatedtesting.UnitTestRunListener;
 import automatedtesting.proxies.TestSuite;
 import automatedtesting.proxies.UnitTest;
 import automatedtesting.proxies.UnitTestResult;
@@ -58,6 +59,7 @@ public class TestManager {
 	private IContext setupContext;
 
 	private String lastStep;
+
 
 	public static TestManager instance() {
 		if (instance == null)
@@ -181,12 +183,16 @@ public class TestManager {
 		for (IMendixObject suite : testsuites) {
 			runTestSuite(context, TestSuite.load(context, suite.getId()));
 		}
-
+		LOG.info("Stopping the Execution Subscriber");
 		LOG.info("Finished testrun on all suites");
 	}
 
 	public synchronized boolean runTestSuite(IContext context, TestSuite testSuite) throws CoreException {
 		LOG.info("Starting testrun on " + testSuite.getModule());
+
+		MicroflowExecutionRecorder recorder = new MicroflowExecutionRecorder();
+		AutomatedTestCoverageRecorder subscriber = new AutomatedTestCoverageRecorder(testSuite.getModule(), recorder);
+		subscriber.start();
 
 		/**
 		 * Reset state
@@ -259,6 +265,8 @@ public class TestManager {
 				.setResult(testSuite.getTestFailedCount() == 0L ? UnitTestResult._3_Success : UnitTestResult._2_Failed);
 		testSuite.commit();
 
+		subscriber.stop();
+		CoverageFileWriter.writeCoverageFile(recorder.getReport());
 		LOG.info("Finished testrun on " + testSuite.getModule());
 		return true;
 	}
