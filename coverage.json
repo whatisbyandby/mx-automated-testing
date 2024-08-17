@@ -1,15 +1,15 @@
 {
   "MySecondModule": {
     "UnitTests": {
-      "d921ad24-d76e-4d5c-931c-63158ef470fe": {
+      "e2073d86-6026-4704-868f-89a573c6bdf6": {
         "name": "UT_Do_A_Second_Thing",
-        "executionId": "d921ad24-d76e-4d5c-931c-63158ef470fe",
+        "executionId": "e2073d86-6026-4704-868f-89a573c6bdf6",
         "MicroflowsCovered": {
           "Covered": {
             "microflowName": "Covered",
             "moduleName": "MySecondModule",
             "qualifiedName": "MySecondModule.Covered",
-            "executionId": "d921ad24-d76e-4d5c-931c-63158ef470fe",
+            "executionId": "e2073d86-6026-4704-868f-89a573c6bdf6",
             "status": "FINISHED"
           }
         }
@@ -19,131 +19,126 @@
   },
   "AutomatedTesting": {
     "UnitTests": {
-      "baf3c63b-9fcc-4ed9-88de-48fcb188d2ca": {
-        "name": "UT_ValidUnitTest",
-        "executionId": "baf3c63b-9fcc-4ed9-88de-48fcb188d2ca",
-        "MicroflowsCovered": {
-          "ACT_DoSomething": {
-            "microflowName": "ACT_DoSomething",
-            "moduleName": "AutomatedTesting",
-            "qualifiedName": "AutomatedTesting.ACT_DoSomething",
-            "executionId": "baf3c63b-9fcc-4ed9-88de-48fcb188d2ca",
-            "status": "FINISHED"
-          },
-          "ReportStep": {
-            "microflowName": "ReportStep",
-            "moduleName": "AutomatedTesting",
-            "qualifiedName": "AutomatedTesting.ReportStep",
-            "executionId": "baf3c63b-9fcc-4ed9-88de-48fcb188d2ca",
-            "status": "FINISHED"
-          }
-        }
-      },
-      "8b82cded-34e2-4365-b383-f9d6d7235c2d": {
-        "name": "Test_WithoutReturn",
-        "executionId": "8b82cded-34e2-4365-b383-f9d6d7235c2d",
-        "MicroflowsCovered": {}
-      },
-      "5f672dd1-3b3c-425a-a398-09dbf92703e5": {
-        "name": "Setup",
-        "executionId": "5f672dd1-3b3c-425a-a398-09dbf92703e5",
-        "MicroflowsCovered": {}
-      },
-      "f66b28cf-5121-45d6-bde6-ad1b02618d71": {
-        "name": "Test_FailingUnitTest",
-        "executionId": "f66b28cf-5121-45d6-bde6-ad1b02618d71",
-        "MicroflowsCovered": {
-          "ReportStep": {
-            "microflowName": "ReportStep",
-            "moduleName": "AutomatedTesting",
-            "qualifiedName": "AutomatedTesting.ReportStep",
-            "executionId": "f66b28cf-5121-45d6-bde6-ad1b02618d71",
-            "status": "FINISHED"
-          }
-        }
-      },
-      "3b804037-8f49-4903-93a9-6919e2ab4958": {
-        "name": "TearDown",
-        "executionId": "3b804037-8f49-4903-93a9-6919e2ab4958",
-        "MicroflowsCovered": {}
-      },
-      "3c1bb35e-12e4-4da5-ae1f-e444a5599ba5": {
-        "name": "Test_ValidUnitTest",
-        "executionId": "3c1bb35e-12e4-4da5-ae1f-e444a5599ba5",
-        "MicroflowsCovered": {
-          "ReportStep": {
-            "microflowName": "ReportStep",
-            "moduleName": "AutomatedTesting",
-            "qualifiedName": "AutomatedTesting.ReportStep",
-            "executionId": "3c1bb35e-12e4-4da5-ae1f-e444a5599ba5",
-            "status": "FINISHED"
-          }
-        }
-      },
-      "a1bf61fd-c6d2-4d32-8fe9-5a785eaf94e9": {
+      "7d6b0fd2-d66d-4d6c-b939-68aeacda68de": {
         "name": "Test_IsAssertionErrorCheck",
-        "executionId": "a1bf61fd-c6d2-4d32-8fe9-5a785eaf94e9",
+        "executionId": "7d6b0fd2-d66d-4d6c-b939-68aeacda68de",
         "MicroflowsCovered": {
           "IsAssertionError": {
             "microflowName": "IsAssertionError",
             "moduleName": "AutomatedTesting",
             "qualifiedName": "AutomatedTesting.IsAssertionError",
-            "executionId": "a1bf61fd-c6d2-4d32-8fe9-5a785eaf94e9",
+            "executionId": "7d6b0fd2-d66d-4d6c-b939-68aeacda68de",
             "status": "FINISHED"
           },
           "AssertTrue2": {
             "microflowName": "AssertTrue2",
             "moduleName": "AutomatedTesting",
             "qualifiedName": "AutomatedTesting.AssertTrue2",
-            "executionId": "a1bf61fd-c6d2-4d32-8fe9-5a785eaf94e9",
+            "executionId": "7d6b0fd2-d66d-4d6c-b939-68aeacda68de",
             "status": "FINISHED"
           }
         }
+      },
+      "9713103c-f03d-44e4-8bb4-32ece98713b2": {
+        "name": "Setup",
+        "executionId": "9713103c-f03d-44e4-8bb4-32ece98713b2",
+        "MicroflowsCovered": {}
+      },
+      "4b408da4-f241-485d-9fbe-5306b28a1f22": {
+        "name": "UT_ValidUnitTest",
+        "executionId": "4b408da4-f241-485d-9fbe-5306b28a1f22",
+        "MicroflowsCovered": {
+          "ACT_DoSomething": {
+            "microflowName": "ACT_DoSomething",
+            "moduleName": "AutomatedTesting",
+            "qualifiedName": "AutomatedTesting.ACT_DoSomething",
+            "executionId": "4b408da4-f241-485d-9fbe-5306b28a1f22",
+            "status": "FINISHED"
+          },
+          "ReportStep": {
+            "microflowName": "ReportStep",
+            "moduleName": "AutomatedTesting",
+            "qualifiedName": "AutomatedTesting.ReportStep",
+            "executionId": "4b408da4-f241-485d-9fbe-5306b28a1f22",
+            "status": "FINISHED"
+          }
+        }
+      },
+      "eeeadb47-65bd-452f-b820-9d16a87b7917": {
+        "name": "TearDown",
+        "executionId": "eeeadb47-65bd-452f-b820-9d16a87b7917",
+        "MicroflowsCovered": {}
+      },
+      "5150ecde-91d0-4af3-ac3d-3e54e5f7b945": {
+        "name": "Test_FailingUnitTest",
+        "executionId": "5150ecde-91d0-4af3-ac3d-3e54e5f7b945",
+        "MicroflowsCovered": {
+          "ReportStep": {
+            "microflowName": "ReportStep",
+            "moduleName": "AutomatedTesting",
+            "qualifiedName": "AutomatedTesting.ReportStep",
+            "executionId": "5150ecde-91d0-4af3-ac3d-3e54e5f7b945",
+            "status": "FINISHED"
+          }
+        }
+      },
+      "92ea0a61-0daf-41ab-8491-5b67a0df3d14": {
+        "name": "Test_ValidUnitTest",
+        "executionId": "92ea0a61-0daf-41ab-8491-5b67a0df3d14",
+        "MicroflowsCovered": {
+          "ReportStep": {
+            "microflowName": "ReportStep",
+            "moduleName": "AutomatedTesting",
+            "qualifiedName": "AutomatedTesting.ReportStep",
+            "executionId": "92ea0a61-0daf-41ab-8491-5b67a0df3d14",
+            "status": "FINISHED"
+          }
+        }
+      },
+      "7c55c2dd-e64e-4ddd-9f98-8bd392bf1578": {
+        "name": "Test_WithoutReturn",
+        "executionId": "7c55c2dd-e64e-4ddd-9f98-8bd392bf1578",
+        "MicroflowsCovered": {}
       }
     },
     "name": "AutomatedTesting"
   },
   "AutomatedTestingTests": {
     "UnitTests": {
-      "4867c0d3-09a4-4fe3-96c3-5ae6e1483bf7": {
+      "d0c004f0-28e1-4866-9ebb-24500a18ca53": {
         "name": "UT_TestActivityLogging",
-        "executionId": "4867c0d3-09a4-4fe3-96c3-5ae6e1483bf7",
+        "executionId": "d0c004f0-28e1-4866-9ebb-24500a18ca53",
         "MicroflowsCovered": {
           "ACT_SomeUnitUnderTest": {
             "microflowName": "ACT_SomeUnitUnderTest",
             "moduleName": "AutomatedTestingTests",
             "qualifiedName": "AutomatedTestingTests.ACT_SomeUnitUnderTest",
-            "executionId": "4867c0d3-09a4-4fe3-96c3-5ae6e1483bf7",
+            "executionId": "d0c004f0-28e1-4866-9ebb-24500a18ca53",
             "status": "FINISHED"
           }
         }
-      },
-      "6b3e226e-cc2f-43bb-8a95-793141d2788c": {
-        "name": "UT_GetCoverageReport",
-        "executionId": "6b3e226e-cc2f-43bb-8a95-793141d2788c",
-        "MicroflowsCovered": {}
       }
     },
     "name": "AutomatedTestingTests"
   },
   "MyFirstModule": {
     "UnitTests": {
-      "1953474f-a8b9-4455-b640-30533d1d792a": {
+      "5c65b21b-1ead-455c-b2af-59e4bd5336dd": {
         "name": "UT_ACT_DoSomething",
-        "executionId": "1953474f-a8b9-4455-b640-30533d1d792a",
+        "executionId": "5c65b21b-1ead-455c-b2af-59e4bd5336dd",
         "MicroflowsCovered": {
           "Do_Something": {
             "microflowName": "Do_Something",
             "moduleName": "MyFirstModule",
             "qualifiedName": "MyFirstModule.Do_Something",
-            "executionId": "1953474f-a8b9-4455-b640-30533d1d792a",
+            "executionId": "5c65b21b-1ead-455c-b2af-59e4bd5336dd",
             "status": "FINISHED"
           },
           "ACT_DoSomething": {
             "microflowName": "ACT_DoSomething",
             "moduleName": "MyFirstModule",
             "qualifiedName": "MyFirstModule.ACT_DoSomething",
-            "executionId": "1953474f-a8b9-4455-b640-30533d1d792a",
+            "executionId": "5c65b21b-1ead-455c-b2af-59e4bd5336dd",
             "status": "FINISHED"
           }
         }

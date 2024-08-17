@@ -13,27 +13,36 @@ import java.util.Map;
 
 public class CoverageFile {
 
+    public static File getCoverageFile(String path) throws IOException {
+        File coverageFile = new File(path);
+        coverageFile.createNewFile();
+        return coverageFile;
+    }
     public static void writeCoverageToFile(File coverageFile, Map<String, TestSuite> report) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         Map<String, TestSuite> testSuites = getCoverageFromFile(coverageFile);
 
-        mergeResults(report, testSuites);
+        if (testSuites != null) {
+            mergeResults(report, testSuites);
+        }
 
         String reportJson = gson.toJson(report);
-        FileOutputStream out = new FileOutputStream(coverageFile);
-
-        out.write(reportJson.getBytes(StandardCharsets.UTF_8));
+        try (FileOutputStream out = new FileOutputStream(coverageFile)) {
+            out.write(reportJson.getBytes(StandardCharsets.UTF_8));
+        }
     }
 
     public static Map<String, TestSuite> getCoverageFromFile(File coverageFile) throws IOException {
 
-        FileInputStream existingCoverageFile = new FileInputStream(coverageFile);
-        String existingJson = new String(existingCoverageFile.readAllBytes(), "UTF-8");
+        try (FileInputStream existingCoverageFile = new FileInputStream(coverageFile)) {
+            String existingJson = new String(existingCoverageFile.readAllBytes(), StandardCharsets.UTF_8);
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Type type = new TypeToken<Map<String, TestSuite>>(){}.getType();
-        return gson.fromJson(existingJson, type);
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            Type type = new TypeToken<Map<String, TestSuite>>() {
+            }.getType();
+            return gson.fromJson(existingJson, type);
+        }
     }
 
     private static void mergeResults(Map<String, TestSuite> newReport, Map<String, TestSuite> existing) {

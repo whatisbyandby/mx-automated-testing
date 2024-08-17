@@ -272,11 +272,15 @@ public class TestManager {
 		testSuite.commit();
 
 		subscriber.stop();
-		try {
-			File coverageFile = new File("../coverage.json");
-			CoverageFile.writeCoverageToFile(coverageFile, recorder.getReport());
-		} catch (IOException e) {
-			LOG.error("Unable to update the coverage file");
+
+		// The Coverage File is only written if the app is running locally via studio pro
+		if (Core.isInDevelopment()) {
+			try {
+				File coverageFile = CoverageFile.getCoverageFile("../coverage.json");
+				CoverageFile.writeCoverageToFile(coverageFile, recorder.getReport());
+			} catch (IOException e) {
+				LOG.error("Unable to update the coverage file");
+			}
 		}
 
 		LOG.info("Finished testrun on " + testSuite.getModule());
@@ -697,55 +701,71 @@ public class TestManager {
 		return lastStep;
 	}
 
-	public automatedtesting.proxies.CoverageReport getCoverageReport(TestSuite testSuite, IContext ctx) throws IOException {
+	public automatedtesting.proxies.CoverageReport getCoverageReport(TestSuite testSuite, IContext ctx) {
+		// The coverage file should only be available when running locally via Studio Pro
+		if (!Core.isInDevelopment()) {
+			return null;
+		}
 		if (testSuite == null) {
 			return null;
 		}
 		// Read the file into a map
-		File coverageFile = new File("../coverage.json");
-		Map<String, automatedtesting.TestSuite> coverageMap = CoverageFile.getCoverageFromFile(coverageFile);
+		try {
+			File coverageFile = CoverageFile.getCoverageFile("../coverage.json");
 
-		if (!coverageMap.containsKey(testSuite.getModule())) {
+			Map<String, automatedtesting.TestSuite> coverageMap = CoverageFile.getCoverageFromFile(coverageFile);
+
+			if (coverageMap == null) {
+				return null;
+			}
+
+			if (!coverageMap.containsKey(testSuite.getModule())) {
+				return null;
+			}
+
+			CoverageReport coverageReport = new CoverageReport(ctx);
+
+
+			Map<String, MicroflowExecution> executionMap = new HashMap<>();
+
+			Core.getMicroflowNames().stream()
+					// TODO Contains will possibly cause issue if there are two modules that overlap with their names.
+					// TODO i.e. MyFirstModule & MyFirstModuleTests
+					// TODO Use something more precise then just contains
+					.filter(mfName -> mfName.contains(testSuite.getModule(ctx)))
+					.filter(mfName -> !mfName.split("\\.")[1].contains("UT_"))
+					.forEach(mfName -> {
+						MicroflowExecution ex = new MicroflowExecution(ctx);
+						ex.setQualifiedName(mfName);
+						executionMap.put(mfName, ex);
+					});
+
+			automatedtesting.TestSuite suite = coverageMap.get(testSuite.getModule());
+			suite.UnitTests.values().forEach(ut -> {
+				ut.MicroflowsCovered.values().forEach(mf -> {
+					MicroflowExecution ex = executionMap.get(mf.getQualifiedName());
+					if (ex != null) {
+						ex.setIsCoveredByTests(true);
+					}
+				});
+			});
+
+			Long numCovered = executionMap.values().stream().filter(MicroflowExecution::getIsCoveredByTests).count();
+			Long total = (long) executionMap.size();
+
+			BigDecimal percentCovered = BigDecimal.valueOf(numCovered)
+					.divide(BigDecimal.valueOf(total), 4, RoundingMode.HALF_UP)
+					.multiply(BigDecimal.valueOf(100));
+
+			coverageReport.setCoverageReport_MicroflowExecution(new ArrayList<>(executionMap.values()));
+			coverageReport.setCoveragePercent(percentCovered);
+			coverageReport.setNumMicroflowsTotal(total);
+			coverageReport.setNumMicroflowsCovered(numCovered);
+
+
+			return coverageReport;
+		} catch (IOException e) {
 			return null;
 		}
-
-		CoverageReport coverageReport = new CoverageReport(ctx);
-
-
-		Map<String, MicroflowExecution> executionMap = new HashMap<>();
-
-		Core.getMicroflowNames().stream()
-				.filter(mfName -> mfName.contains(testSuite.getModule(ctx)))
-				.filter(mfName -> !mfName.split("\\.")[1].contains("UT_"))
-				.forEach(mfName -> {
-					MicroflowExecution ex = new MicroflowExecution(ctx);
-					ex.setQualifiedName(mfName);
-					executionMap.put(mfName, ex);
-				});
-
-		automatedtesting.TestSuite suite = coverageMap.get(testSuite.getModule());
-		suite.UnitTests.values().forEach(ut -> {
-			ut.MicroflowsCovered.values().forEach(mf -> {
-				MicroflowExecution ex = executionMap.get(mf.getQualifiedName());
-				if (ex != null) {
-					ex.setIsCoveredByTests(true);
-				}
-			});
-		});
-
-		Long numCovered = executionMap.values().stream().filter(MicroflowExecution::getIsCoveredByTests).count();
-		Long total = (long) executionMap.size();
-
-		BigDecimal percentCovered = BigDecimal.valueOf(numCovered)
-				.divide(BigDecimal.valueOf(total), 4, RoundingMode.HALF_UP)
-				.multiply(BigDecimal.valueOf(100));
-
-		coverageReport.setCoverageReport_MicroflowExecution(new ArrayList<>(executionMap.values()));
-		coverageReport.setCoveragePercent(percentCovered);
-		coverageReport.setNumMicroflowsTotal(total);
-		coverageReport.setNumMicroflowsCovered(numCovered);
-
-
-		return coverageReport;
 	}
 }
