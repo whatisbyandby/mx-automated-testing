@@ -1,0 +1,154 @@
+{
+  "MySecondModule": {
+    "UnitTests": {
+      "d921ad24-d76e-4d5c-931c-63158ef470fe": {
+        "name": "UT_Do_A_Second_Thing",
+        "executionId": "d921ad24-d76e-4d5c-931c-63158ef470fe",
+        "MicroflowsCovered": {
+          "Covered": {
+            "microflowName": "Covered",
+            "moduleName": "MySecondModule",
+            "qualifiedName": "MySecondModule.Covered",
+            "executionId": "d921ad24-d76e-4d5c-931c-63158ef470fe",
+            "status": "FINISHED"
+          }
+        }
+      }
+    },
+    "name": "MySecondModule"
+  },
+  "AutomatedTesting": {
+    "UnitTests": {
+      "baf3c63b-9fcc-4ed9-88de-48fcb188d2ca": {
+        "name": "UT_ValidUnitTest",
+        "executionId": "baf3c63b-9fcc-4ed9-88de-48fcb188d2ca",
+        "MicroflowsCovered": {
+          "ACT_DoSomething": {
+            "microflowName": "ACT_DoSomething",
+            "moduleName": "AutomatedTesting",
+            "qualifiedName": "AutomatedTesting.ACT_DoSomething",
+            "executionId": "baf3c63b-9fcc-4ed9-88de-48fcb188d2ca",
+            "status": "FINISHED"
+          },
+          "ReportStep": {
+            "microflowName": "ReportStep",
+            "moduleName": "AutomatedTesting",
+            "qualifiedName": "AutomatedTesting.ReportStep",
+            "executionId": "baf3c63b-9fcc-4ed9-88de-48fcb188d2ca",
+            "status": "FINISHED"
+          }
+        }
+      },
+      "8b82cded-34e2-4365-b383-f9d6d7235c2d": {
+        "name": "Test_WithoutReturn",
+        "executionId": "8b82cded-34e2-4365-b383-f9d6d7235c2d",
+        "MicroflowsCovered": {}
+      },
+      "5f672dd1-3b3c-425a-a398-09dbf92703e5": {
+        "name": "Setup",
+        "executionId": "5f672dd1-3b3c-425a-a398-09dbf92703e5",
+        "MicroflowsCovered": {}
+      },
+      "f66b28cf-5121-45d6-bde6-ad1b02618d71": {
+        "name": "Test_FailingUnitTest",
+        "executionId": "f66b28cf-5121-45d6-bde6-ad1b02618d71",
+        "MicroflowsCovered": {
+          "ReportStep": {
+            "microflowName": "ReportStep",
+            "moduleName": "AutomatedTesting",
+            "qualifiedName": "AutomatedTesting.ReportStep",
+            "executionId": "f66b28cf-5121-45d6-bde6-ad1b02618d71",
+            "status": "FINISHED"
+          }
+        }
+      },
+      "3b804037-8f49-4903-93a9-6919e2ab4958": {
+        "name": "TearDown",
+        "executionId": "3b804037-8f49-4903-93a9-6919e2ab4958",
+        "MicroflowsCovered": {}
+      },
+      "3c1bb35e-12e4-4da5-ae1f-e444a5599ba5": {
+        "name": "Test_ValidUnitTest",
+        "executionId": "3c1bb35e-12e4-4da5-ae1f-e444a5599ba5",
+        "MicroflowsCovered": {
+          "ReportStep": {
+            "microflowName": "ReportStep",
+            "moduleName": "AutomatedTesting",
+            "qualifiedName": "AutomatedTesting.ReportStep",
+            "executionId": "3c1bb35e-12e4-4da5-ae1f-e444a5599ba5",
+            "status": "FINISHED"
+          }
+        }
+      },
+      "a1bf61fd-c6d2-4d32-8fe9-5a785eaf94e9": {
+        "name": "Test_IsAssertionErrorCheck",
+        "executionId": "a1bf61fd-c6d2-4d32-8fe9-5a785eaf94e9",
+        "MicroflowsCovered": {
+          "IsAssertionError": {
+            "microflowName": "IsAssertionError",
+            "moduleName": "AutomatedTesting",
+            "qualifiedName": "AutomatedTesting.IsAssertionError",
+            "executionId": "a1bf61fd-c6d2-4d32-8fe9-5a785eaf94e9",
+            "status": "FINISHED"
+          },
+          "AssertTrue2": {
+            "microflowName": "AssertTrue2",
+            "moduleName": "AutomatedTesting",
+            "qualifiedName": "AutomatedTesting.AssertTrue2",
+            "executionId": "a1bf61fd-c6d2-4d32-8fe9-5a785eaf94e9",
+            "status": "FINISHED"
+          }
+        }
+      }
+    },
+    "name": "AutomatedTesting"
+  },
+  "AutomatedTestingTests": {
+    "UnitTests": {
+      "4867c0d3-09a4-4fe3-96c3-5ae6e1483bf7": {
+        "name": "UT_TestActivityLogging",
+        "executionId": "4867c0d3-09a4-4fe3-96c3-5ae6e1483bf7",
+        "MicroflowsCovered": {
+          "ACT_SomeUnitUnderTest": {
+            "microflowName": "ACT_SomeUnitUnderTest",
+            "moduleName": "AutomatedTestingTests",
+            "qualifiedName": "AutomatedTestingTests.ACT_SomeUnitUnderTest",
+            "executionId": "4867c0d3-09a4-4fe3-96c3-5ae6e1483bf7",
+            "status": "FINISHED"
+          }
+        }
+      },
+      "6b3e226e-cc2f-43bb-8a95-793141d2788c": {
+        "name": "UT_GetCoverageReport",
+        "executionId": "6b3e226e-cc2f-43bb-8a95-793141d2788c",
+        "MicroflowsCovered": {}
+      }
+    },
+    "name": "AutomatedTestingTests"
+  },
+  "MyFirstModule": {
+    "UnitTests": {
+      "1953474f-a8b9-4455-b640-30533d1d792a": {
+        "name": "UT_ACT_DoSomething",
+        "executionId": "1953474f-a8b9-4455-b640-30533d1d792a",
+        "MicroflowsCovered": {
+          "Do_Something": {
+            "microflowName": "Do_Something",
+            "moduleName": "MyFirstModule",
+            "qualifiedName": "MyFirstModule.Do_Something",
+            "executionId": "1953474f-a8b9-4455-b640-30533d1d792a",
+            "status": "FINISHED"
+          },
+          "ACT_DoSomething": {
+            "microflowName": "ACT_DoSomething",
+            "moduleName": "MyFirstModule",
+            "qualifiedName": "MyFirstModule.ACT_DoSomething",
+            "executionId": "1953474f-a8b9-4455-b640-30533d1d792a",
+            "status": "FINISHED"
+          }
+        }
+      }
+    },
+    "name": "MyFirstModule"
+  }
+}

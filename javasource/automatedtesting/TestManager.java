@@ -1,5 +1,7 @@
 package automatedtesting;
 
+import automatedtesting.proxies.CoverageReport;
+import automatedtesting.proxies.MicroflowExecution;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.logging.ILogNode;
@@ -15,7 +17,6 @@ import org.junit.runner.Request;
 import org.junit.runners.JUnit4;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
-import automatedtesting.UnitTestRunListener;
 import automatedtesting.proxies.TestSuite;
 import automatedtesting.proxies.UnitTest;
 import automatedtesting.proxies.UnitTestResult;
@@ -23,7 +24,10 @@ import automatedtesting.proxies.UnitTestResult;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
@@ -59,6 +63,8 @@ public class TestManager {
 	private IContext setupContext;
 
 	private String lastStep;
+
+
 
 
 	public static TestManager instance() {
@@ -266,7 +272,13 @@ public class TestManager {
 		testSuite.commit();
 
 		subscriber.stop();
-		CoverageFileWriter.writeCoverageFile(recorder.getReport());
+		try {
+			File coverageFile = new File("../coverage.json");
+			CoverageFile.writeCoverageToFile(coverageFile, recorder.getReport());
+		} catch (IOException e) {
+			LOG.error("Unable to update the coverage file");
+		}
+
 		LOG.info("Finished testrun on " + testSuite.getModule());
 		return true;
 	}
@@ -683,5 +695,57 @@ public class TestManager {
 		// MWE: this system is problematic weird if used from multiple simultanously
 		// used threads..
 		return lastStep;
+	}
+
+	public automatedtesting.proxies.CoverageReport getCoverageReport(TestSuite testSuite, IContext ctx) throws IOException {
+		if (testSuite == null) {
+			return null;
+		}
+		// Read the file into a map
+		File coverageFile = new File("../coverage.json");
+		Map<String, automatedtesting.TestSuite> coverageMap = CoverageFile.getCoverageFromFile(coverageFile);
+
+		if (!coverageMap.containsKey(testSuite.getModule())) {
+			return null;
+		}
+
+		CoverageReport coverageReport = new CoverageReport(ctx);
+
+
+		Map<String, MicroflowExecution> executionMap = new HashMap<>();
+
+		Core.getMicroflowNames().stream()
+				.filter(mfName -> mfName.contains(testSuite.getModule(ctx)))
+				.filter(mfName -> !mfName.split("\\.")[1].contains("UT_"))
+				.forEach(mfName -> {
+					MicroflowExecution ex = new MicroflowExecution(ctx);
+					ex.setQualifiedName(mfName);
+					executionMap.put(mfName, ex);
+				});
+
+		automatedtesting.TestSuite suite = coverageMap.get(testSuite.getModule());
+		suite.UnitTests.values().forEach(ut -> {
+			ut.MicroflowsCovered.values().forEach(mf -> {
+				MicroflowExecution ex = executionMap.get(mf.getQualifiedName());
+				if (ex != null) {
+					ex.setIsCoveredByTests(true);
+				}
+			});
+		});
+
+		Long numCovered = executionMap.values().stream().filter(MicroflowExecution::getIsCoveredByTests).count();
+		Long total = (long) executionMap.size();
+
+		BigDecimal percentCovered = BigDecimal.valueOf(numCovered)
+				.divide(BigDecimal.valueOf(total), 4, RoundingMode.HALF_UP)
+				.multiply(BigDecimal.valueOf(100));
+
+		coverageReport.setCoverageReport_MicroflowExecution(new ArrayList<>(executionMap.values()));
+		coverageReport.setCoveragePercent(percentCovered);
+		coverageReport.setNumMicroflowsTotal(total);
+		coverageReport.setNumMicroflowsCovered(numCovered);
+
+
+		return coverageReport;
 	}
 }

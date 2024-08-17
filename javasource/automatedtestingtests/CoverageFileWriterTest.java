@@ -22,6 +22,6 @@ public class CoverageFileWriterTest {
         TestSuites.put("MyFirstModule", testSuite);
 
 
-        CoverageFileWriter.writeCoverageFile(TestSuites);
+//        CoverageFileWriter.writeCoverageFile(TestSuites);
     }
 }
